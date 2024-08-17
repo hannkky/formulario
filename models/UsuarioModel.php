@@ -26,6 +26,5 @@ class UsuarioModel {
             return false;
         }
     }
-
 }
 ?>

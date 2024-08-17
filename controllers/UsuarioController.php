@@ -1,5 +1,5 @@
 <?php
-require_once '../models/UsuarioModel.php';
+require '../models/UsuarioModel.php';
 
 class UsuarioController {
     private $usuarioModel;
@@ -10,7 +10,6 @@ class UsuarioController {
 
     public function registrarUsuario() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Obtener datos del formulario
             $nombre = $_POST['nombre'];
             $apellido = $_POST['apellido'];
             $email = $_POST['email'];
@@ -21,11 +20,12 @@ class UsuarioController {
             $lugar = $_POST['lugar_favorito'];
             $color = $_POST['color_favorito'];
 
-            // Subir imagen
-            move_uploaded_file($_FILES['imagen']['tmp_name'], "../public/uploads/$imagen");
+            move_uploaded_file($_FILES['imagen']['tmp_name'], "../public/images/uploads/$imagen");
 
+            // Registrar usuario
             $this->usuarioModel->registrarUsuario($nombre, $apellido, $email, $password, $imagen, $comida, $artista, $lugar, $color);
 
+            // Redireccionar o mostrar mensaje de éxito
             echo "Registro exitoso";
         }
     }
