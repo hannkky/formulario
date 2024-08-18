@@ -1,22 +1,234 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reset de estilos básicos */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
 }
 
-header, footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
+body {
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    height: 90vh;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.left-section {
+    flex: 1;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-section img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.right-section {
+    flex: 1;
+    background-color: #fff;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 form {
-    width: 300px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+h1 .brand {
+    color: #87ab69;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    width: 48%;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
     border: 1px solid #ccc;
+    font-size: 0.9rem;
+    background-color: #f9f9f9;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #87ab69;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #759557;
+}
+
+.photo-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.upload-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.profile-icon {
+    font-size: 3rem;
+    color: #87ab69;
+}
+
+.upload-label span {
+    font-size: 1rem;
+    color: #555;
+    white-space: nowrap;
+}
+
+.upload-label i {
+    font-size: 1.5rem;
+    color: #87ab69;
+}
+
+.photo-upload small {
+    padding-left: 5px;
+    color: #888;
+    white-space: nowrap;
+}
+
+form p {
+    text-align: center;
+    margin-top: 20px;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+form a {
+    color: #87ab69;
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos específicos para el formulario de login */
+/* Estilos generales y responsivos permanecen igual */
+
+/* Estilos específicos para el formulario de login */
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.login-form .form-group {
+    width: 100%; /* Forzar a una columna */
+    margin-bottom: 20px; /* Añadir espacio entre los campos */
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .left-section {
+        display: none;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        width: 100%;
+    }
+}
+
+.admin-container {
+    padding: 30px;
+    background-color: #fff;
     border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.admin-container h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.admin-options {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.admin-options a {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #87ab69;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.admin-options a:hover {
+    background-color: #759557;
 }

@@ -1,30 +1,34 @@
 <?php
+require_once '../config/database.php';
+
 class UsuarioModel {
-    private $db;
+    private $conn;
 
-    public function __construct($db) {
-        $this->db = $db;
+    public function __construct() {
+        $database = new Database();
+        $this->conn = $database->getConnection();
     }
 
-    public function registrarUsuario($nombre, $apellido, $email, $password, $imagen, $comida, $artista, $lugar, $color) {
-        $sql = "INSERT INTO usuarios (nombre, apellido, email, contraseña, comida_favorita, artista_favorito, lugar_favorito, color_favorito, imagen) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $this->db->prepare($sql);
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $stmt->execute([$nombre, $apellido, $email, $hashedPassword, $comida, $artista, $lugar, $color, $imagen]);
+    // Método para obtener un usuario por su email
+    public function getUserByEmail($email) {
+        $query = "SELECT * FROM usuarios WHERE email = :email";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function autenticarUsuario($email, $password) {
-        $sql = "SELECT * FROM usuarios WHERE email = ?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$email]);
-        $usuario = $stmt->fetch();
+    // Método para registrar un nuevo usuario
+    public function registerUser($nombre, $apellido, $email, $password) {
+        $query = "INSERT INTO usuarios (nombre, apellido, email, password) VALUES (:nombre, :apellido, :email, :password)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':nombre', $nombre);
+        $stmt->bindParam(':apellido', $apellido);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $password);
 
-        if ($usuario && password_verify($password, $usuario['contraseña'])) {
-            return $usuario;
-        } else {
-            return false;
-        }
+        // Verificamos si la ejecución fue exitosa
+        return $stmt->execute();
     }
 }
 ?>

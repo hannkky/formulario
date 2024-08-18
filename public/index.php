@@ -1,16 +1,20 @@
 <?php
-require '../config/database.php';
-require '../controllers/UsuarioController.php';
+require_once '../routes/web.php';
 
-$usuarioController = new UsuarioController($db);
+session_start();
+$isAuthenticated = $_SESSION['authenticated'] ?? false;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['accion']) && $_POST['accion'] === 'registrar') {
-        $usuarioController->registrarUsuario();
-    } elseif (isset($_POST['accion']) && $_POST['accion'] === 'login') {
-        $usuarioController->loginUsuario();
-    }
-} else {
-    echo "Página de inicio cargada correctamente";
+$action = $_GET['action'] ?? 'login'; // Por defecto, mostrar el formulario de login
+
+switch ($action) {
+    case 'login':
+        include '../views/login.php';
+        break;
+    case 'register':
+        include '../views/registro.php';
+        break;
+    default:
+        include '../views/login.php'; // Si no se especifica ninguna acción, mostrar el login
+        break;
 }
 ?>
